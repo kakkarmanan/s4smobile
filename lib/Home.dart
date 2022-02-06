@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:s4smobile/Patient/NewSession.dart';
 
 class Home extends StatefulWidget {
   final String email;
@@ -33,7 +34,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         title: const Text("s4s"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewSession(),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
         backgroundColor: Colors.red,
       ),
