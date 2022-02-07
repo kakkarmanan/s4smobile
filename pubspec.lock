@@ -85,13 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -113,13 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.3"
-  fl_chart:
+  flip_card:
     dependency: "direct dev"
     description:
-      name: fl_chart
+      name: flip_card
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.41.0"
+    version: "0.6.0"
   flutter:
     dependency: "direct main"
     description: flutter
