@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:s4smobile/patient/previousSessions.dart';
-import 'package:s4smobile/patient/routine.dart';
+import 'package:s4smobile/patient/Routines.dart';
 import 'package:s4smobile/patient/upcoming_sessions.dart';
 import 'package:s4smobile/patient/NewSession.dart';
 import 'package:s4smobile/patient/dashboard.dart';
