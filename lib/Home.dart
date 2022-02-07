@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:s4smobile/patient/previousSessions.dart';
-import 'package:s4smobile/patient/Routines.dart';
-import 'package:s4smobile/patient/upcoming_sessions.dart';
-import 'package:s4smobile/patient/NewSession.dart';
-import 'package:s4smobile/patient/dashboard.dart';
+import 'package:s4smobile/previousSessions.dart';
+import 'package:s4smobile/Routines.dart';
+import 'package:s4smobile/upcoming_sessions.dart';
+import 'package:s4smobile/NewSession.dart';
+import 'package:s4smobile/dashboard.dart';
+import 'package:s4smobile/widgets/drawer.dart';
 
 class Home extends StatefulWidget {
   final String email;
@@ -38,6 +39,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       appBar: AppBar(
         title: const Text("s4s"),
       ),
+      drawer: drawer(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
