@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:s4smobile/Home.dart';
-import 'package:s4smobile/Patient/NewSession.dart';
 
 void main() {
   runApp(MyApp());
