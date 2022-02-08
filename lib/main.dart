@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:s4smobile/DoctorHome.dart';
 import 'package:s4smobile/Home.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xffd5e4e1),
         colorScheme: ColorScheme.light(),
       ),
-      home: Home(
+      home: DoctorHome(
         email: 'ayush@gmail.com',
       ),
     );
