@@ -6,6 +6,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:date_field/date_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DoctorSignupPage extends StatefulWidget {
   @override
@@ -56,66 +57,29 @@ class _DoctorSignupPageState extends State<DoctorSignupPage> {
   TextEditingController pincodeController = TextEditingController();
 
   TextEditingController licenseController = TextEditingController();
-  void _pickFiles() async {
-    _resetState();
-    try {
-      _directoryPath = null;
-      _paths = (await FilePicker.platform.pickFiles(
-        type: _pickingType,
-        allowMultiple: _multiPick,
-        onFileLoading: (FilePickerStatus status) => print(status),
-        allowedExtensions: (_extension?.isNotEmpty ?? false)
-            ? _extension?.replaceAll(' ', '').split(',')
-            : null,
-      ))
-          ?.files;
-    } on PlatformException catch (e) {
-      _logException('Unsupported operation' + e.toString());
-    } catch (e) {
-      _logException(e.toString());
-    }
-    if (!mounted) return;
-    setState(() {
-      _isLoading = false;
-      _fileName =
-          _paths != null ? _paths!.map((e) => e.name).toString() : '...';
-      _userAborted = _paths == null;
+
+  uploadImage(File? file) async {
+    var ref = FirebaseStorage.instance.ref().child('posts/$_fileName');
+    await ref.putFile(file!).whenComplete(() async {
+      await ref.getDownloadURL().then((value) {
+        setState(() {
+          licenseUrl = value;
+          print(licenseUrl);
+        });
+      });
     });
   }
 
-  void _logException(String message) {
-    print(message);
-    _scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
-    _scaffoldMessengerKey.currentState?.showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
+  getFileUrl() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-  void _resetState() {
-    if (!mounted) {
-      return;
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      uploadImage(file);
+    } else {
+      // User canceled the picker
     }
-    setState(() {
-      _isLoading = true;
-      _directoryPath = null;
-      _fileName = null;
-      _paths = null;
-      _saveAsFileName = null;
-      _userAborted = false;
-    });
   }
-
-  // getFileUrl() async {
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-  //   if (result != null) {
-  //     File file = File(result.files.single.path);
-  //   } else {
-  //     // User canceled the picker
-  //   }
-  // }
 
   final List<Map<String, dynamic>> _items = [
     {
@@ -187,7 +151,7 @@ class _DoctorSignupPageState extends State<DoctorSignupPage> {
                         controller: yearsofExpController),
                     Container(
                       child: TextButton(
-                        onPressed: _pickFiles,
+                        onPressed: getFileUrl,
                         child: const Text('Upload Document'),
                       ),
                     ),

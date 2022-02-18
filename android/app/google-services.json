@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "275988877930",
+    "project_id": "s4smobile",
+    "storage_bucket": "s4smobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275988877930:android:63d7ffa9e1c68371a87013",
+        "android_client_info": {
+          "package_name": "com.mk.s4smobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275988877930-k5ls18j5ubsaudg9cks413skl4q3a1qm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNXekvNMCz3ni21ganY-aYF0Wi_r6yNbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275988877930-k5ls18j5ubsaudg9cks413skl4q3a1qm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
