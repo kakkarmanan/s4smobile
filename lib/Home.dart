@@ -6,6 +6,7 @@ import 'package:s4smobile/upcoming_sessions.dart';
 import 'package:s4smobile/NewSession.dart';
 import 'package:s4smobile/dashboard.dart';
 import 'package:s4smobile/widgets/drawer.dart';
+import 'package:localstorage/localstorage.dart';
 
 class Home extends StatefulWidget {
   final String email;
@@ -17,13 +18,20 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   var email;
-
+  final LocalStorage storage = new LocalStorage('s4s');
   PageController _pageController = PageController();
   _HomeState({required this.email});
   late int currentIndex;
+  Future<void> awaitReady() async {
+    await storage.ready;
+    print("home print");
+    print(storage.getItem('user'));
+  }
+
   @override
   void initState() {
     super.initState();
+    awaitReady();
     currentIndex = 0;
   }
 

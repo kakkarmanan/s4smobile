@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:s4smobile/Home.dart';
 import 'dart:convert';
-
+import 'package:localstorage/localstorage.dart';
 import 'package:s4smobile/dashboard.dart';
 
 class UserLoginPage extends StatefulWidget {
@@ -13,8 +13,27 @@ class UserLoginPage extends StatefulWidget {
 
 class _UserLoginPageState extends State<UserLoginPage> {
   TextEditingController emailController = TextEditingController();
-
+  final LocalStorage storage = new LocalStorage('s4s');
   TextEditingController passwordController = TextEditingController();
+
+  void addItemsToLocalStorage(var data) async {
+    await storage.setItem('user', data);
+    print("hello");
+    print(storage.getItem('user'));
+  }
+
+  Future<void> awaitReady() async {
+    await storage.ready;
+    print(storage.getItem('user'));
+    if (storage.getItem('user') != null) {
+      print(storage.getItem('user'));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Home(email: storage.getItem('user')["email"])));
+    }
+  }
 
   onSubmit() async {
     print(emailController.text);
@@ -36,6 +55,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
     if (response.statusCode == 200) {
       print(response.body);
       var data = jsonDecode(response.body);
+      addItemsToLocalStorage(data);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -46,6 +66,12 @@ class _UserLoginPageState extends State<UserLoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('User details not found')));
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    awaitReady();
   }
 
   @override
