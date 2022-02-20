@@ -1,12 +1,51 @@
 import 'package:flutter/material.dart';
 //import 'package:s4smobile/widgets/fadeanimation.dart';
+import 'package:http/http.dart' as http;
+import 'package:s4smobile/Home.dart';
+import 'dart:convert';
 
-class UserLoginPage extends StatelessWidget {
+import 'package:s4smobile/dashboard.dart';
+
+class UserLoginPage extends StatefulWidget {
+  @override
+  State<UserLoginPage> createState() => _UserLoginPageState();
+}
+
+class _UserLoginPageState extends State<UserLoginPage> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
-  onSubmit() {
+
+  onSubmit() async {
     print(emailController.text);
     print(passwordController.text);
+    var url = Uri.parse("https://shrink4shrink.herokuapp.com/api/signin");
+    var response = await http.post(url,
+        headers: <String, String>{
+          'content-type': 'application/json',
+          "Accept": "application/json",
+          "charset": "utf-8"
+        },
+        body: json.encode({
+          'email': emailController.text.toString(),
+          'password': passwordController.text.toString(),
+          'doctor': "false",
+        }));
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    if (response.statusCode == 200) {
+      print(response.body);
+      var data = jsonDecode(response.body);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Home(email: emailController.text.toString())));
+    } else {
+      print("Error while logging in");
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User details not found')));
+    }
   }
 
   @override
@@ -82,7 +121,9 @@ class UserLoginPage extends StatelessWidget {
                       child: MaterialButton(
                         minWidth: double.infinity,
                         height: 60,
-                        onPressed: () {},
+                        onPressed: () {
+                          onSubmit();
+                        },
                         color: Colors.greenAccent,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
