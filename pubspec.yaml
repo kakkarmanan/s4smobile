@@ -58,6 +58,7 @@ dev_dependencies:
   dropdown_search: ^2.0.1
   file_picker: ^4.4.0
   firebase_storage: ^10.2.7
+  http: ^0.13.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

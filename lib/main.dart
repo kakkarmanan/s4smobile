@@ -5,6 +5,7 @@ import 'package:s4smobile/login1/welcome.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 's4s',
         theme: ThemeData(
-          backgroundColor: Color(0xffd5e4e1),
-          colorScheme: ColorScheme.light(),
+          backgroundColor: const Color(0xffd5e4e1),
+          colorScheme: const ColorScheme.light(),
         ),
         home: WelcomePage());
   }

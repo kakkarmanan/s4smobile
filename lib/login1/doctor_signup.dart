@@ -7,6 +7,7 @@ import 'package:date_field/date_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:s4smobile/form.dart';
 
 class DoctorSignupPage extends StatefulWidget {
   @override
@@ -14,18 +15,7 @@ class DoctorSignupPage extends StatefulWidget {
 }
 
 class _DoctorSignupPageState extends State<DoctorSignupPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   String? _fileName;
-  String? _saveAsFileName;
-  List<PlatformFile>? _paths;
-  String? _directoryPath;
-  String? _extension;
-  bool _isLoading = false;
-  bool _userAborted = false;
-  bool _multiPick = false;
-  FileType _pickingType = FileType.any;
-  TextEditingController _controller = TextEditingController();
   String licenseUrl = "";
 
   String state = "";
@@ -58,6 +48,11 @@ class _DoctorSignupPageState extends State<DoctorSignupPage> {
 
   TextEditingController licenseController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   uploadImage(File? file) async {
     var ref = FirebaseStorage.instance.ref().child('posts/$_fileName');
     await ref.putFile(file!).whenComplete(() async {
@@ -85,17 +80,14 @@ class _DoctorSignupPageState extends State<DoctorSignupPage> {
     {
       'value': 'Male',
       'label': 'Male',
-      //'icon': const Icon(Icons.boy),
     },
     {
       'value': 'Female',
       'label': 'Female',
-      //'icon': const Icon(Icons.girl),
     },
     {
       'value': 'Prefferably Not Say',
       'label': 'Prefferably Not Say',
-      //'icon': const Icon(Icons.grade),
     },
   ];
 
@@ -260,6 +252,9 @@ class _DoctorSignupPageState extends State<DoctorSignupPage> {
                       child: MaterialButton(
                         minWidth: double.infinity,
                         height: 60,
+                        // onPressed: () => Navigator.of(context).push(
+                        //     MaterialPageRoute(
+                        //         builder: (context) => Typeform())),
                         onPressed: () {},
                         color: Colors.greenAccent,
                         elevation: 0,
