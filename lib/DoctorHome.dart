@@ -8,7 +8,7 @@ import 'package:s4smobile/widgets/drawer.dart';
 import 'package:s4smobile/Doctor/patientlist.dart';
 import 'package:localstorage/localstorage.dart';
 
-final LocalStorage storage = new LocalStorage('s4s');
+final LocalStorage storage = LocalStorage('s4s');
 
 class DoctorHome extends StatefulWidget {
   final String email;
@@ -19,15 +19,29 @@ class DoctorHome extends StatefulWidget {
 }
 
 class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
-  var email;
+  final email;
+
+  Future<void> awaitReady() async {
+    await storage.ready;
+    //print(storage.getItem('user'));
+    // if (storage.getItem('user') != null) {
+    //   print(storage.getItem('user'));
+    //   Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //           builder: (context) =>
+    //               Home(email: storage.getItem('user')["email"])));
+    // }
+  }
 
   PageController _pageController = PageController();
   _HomeState({required this.email});
   late int currentIndex;
   @override
   void initState() {
+    awaitReady();
     super.initState();
-    print(storage.getItem('user'));
+    print('in doctor home: ${storage.getItem('user')}');
     currentIndex = 0;
   }
 

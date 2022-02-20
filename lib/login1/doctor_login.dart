@@ -8,7 +8,7 @@ import 'package:s4smobile/login1/doctor_signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 
-final LocalStorage storage = new LocalStorage('s4s');
+final LocalStorage storage = LocalStorage('s4s');
 
 class DoctorLoginPage extends StatefulWidget {
   @override
@@ -19,6 +19,12 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+
+  void addItemsToLocalStorage(var data) async {
+    await storage.setItem('user', data);
+    print("hello");
+    print(storage.getItem('user'));
+  }
 
   onSubmit() async {
     print(emailController.text);
@@ -40,10 +46,11 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
     print(response.statusCode);
     var decodedData = jsonDecode(response.body);
     if (response.statusCode == 400) {
-      print('bad request');
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Doctor Details not found')));
     } else {
       print('logged in');
-      await storage.setItem('user', decodedData);
+      addItemsToLocalStorage(decodedData);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => DoctorHome(
                 email: emailController.text,
