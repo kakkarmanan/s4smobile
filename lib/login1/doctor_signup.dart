@@ -8,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:s4smobile/form.dart';
+import 'package:http/http.dart' as http;
 
 class DoctorSignupPage extends StatefulWidget {
   @override
@@ -90,6 +91,8 @@ class _DoctorSignupPageState extends State<DoctorSignupPage> {
       'label': 'Prefferably Not Say',
     },
   ];
+
+  onSumit() {}
 
   @override
   Widget build(BuildContext context) {

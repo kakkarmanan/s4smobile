@@ -1,13 +1,54 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:s4smobile/Doctor/dashboarddoc.dart';
+import 'package:s4smobile/DoctorHome.dart';
 import 'package:s4smobile/login1/doctor_signup.dart';
 //import 'package:s4smobile/widgets/fadeanimation.dart';
+import 'package:http/http.dart' as http;
+import 'package:localstorage/localstorage.dart';
 
-class DoctorLoginPage extends StatelessWidget {
+final LocalStorage storage = new LocalStorage('s4s');
+
+class DoctorLoginPage extends StatefulWidget {
+  @override
+  State<DoctorLoginPage> createState() => _DoctorLoginPageState();
+}
+
+class _DoctorLoginPageState extends State<DoctorLoginPage> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
-  onSubmit() {
+
+  onSubmit() async {
     print(emailController.text);
     print(passwordController.text);
+
+    var url = Uri.parse('https://shrink4shrink.herokuapp.com/api/signin');
+    var response = await http.post(url,
+        headers: <String, String>{
+          'content-type': 'application/json',
+          "Accept": "application/json",
+          "charset": "utf-8"
+        },
+        body: json.encode({
+          'email': emailController.text,
+          'password': passwordController.text,
+          'doctor': 'true',
+        }));
+    print(response.body);
+    print(response.statusCode);
+    var decodedData = jsonDecode(response.body);
+    if (response.statusCode == 400) {
+      print('bad request');
+    } else {
+      print('logged in');
+      await storage.setItem('user', decodedData);
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => DoctorHome(
+                email: emailController.text,
+              )));
+    }
   }
 
   @override

@@ -6,6 +6,9 @@ import 'package:s4smobile/Doctor/upcoming_sessionsdoc.dart';
 import 'package:s4smobile/Doctor/dashboarddoc.dart';
 import 'package:s4smobile/widgets/drawer.dart';
 import 'package:s4smobile/Doctor/patientlist.dart';
+import 'package:localstorage/localstorage.dart';
+
+final LocalStorage storage = new LocalStorage('s4s');
 
 class DoctorHome extends StatefulWidget {
   final String email;
@@ -24,6 +27,7 @@ class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    print(storage.getItem('user'));
     currentIndex = 0;
   }
 
