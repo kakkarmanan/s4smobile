@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:s4smobile/Home.dart';
 import 'dart:convert';
 import 'package:localstorage/localstorage.dart';
-import 'package:s4smobile/dashboard.dart';
 
 class UserLoginPage extends StatefulWidget {
   @override
@@ -13,7 +12,7 @@ class UserLoginPage extends StatefulWidget {
 
 class _UserLoginPageState extends State<UserLoginPage> {
   TextEditingController emailController = TextEditingController();
-  final LocalStorage storage = new LocalStorage('s4s');
+  final LocalStorage storage = LocalStorage('s4s');
   TextEditingController passwordController = TextEditingController();
 
   void addItemsToLocalStorage(var data) async {
