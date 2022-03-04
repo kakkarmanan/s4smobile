@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:s4smobile/model/session_model.dart';
-import 'package:s4smobile/session_card.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:s4smobile/session_details.dart';
 
 class PreviousSessions extends StatefulWidget {
   PreviousSessions({Key? key}) : super(key: key);
@@ -42,6 +42,20 @@ class _PreviousSessionsState extends State<PreviousSessions> {
     }
   }
 
+  void detailsPage(
+      String user, String date, String time, String title, String doctor) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SessionDetails(
+                  user: user,
+                  date: date,
+                  time: time,
+                  title: title,
+                  doctor: doctor,
+                )));
+  }
+
   Future<void> awaitReady() async {
     await storage.ready;
     print(storage.getItem("user")["email"]);
@@ -58,7 +72,7 @@ class _PreviousSessionsState extends State<PreviousSessions> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: sessions?.length,
+        itemCount: sessions.length,
         itemBuilder: (context, i) {
           return Card(
             child: Container(
@@ -75,13 +89,13 @@ class _PreviousSessionsState extends State<PreviousSessions> {
                             flex: 5,
                             child: ListTile(
                               title: Text(
-                                sessions?[i]["title"],
+                                sessions[i]["title"],
                               ),
                               subtitle: Text(
-                                sessions?[i]["date"],
+                                sessions[i]["date"],
                               ),
                               trailing: Text(
-                                sessions?[i]["time"],
+                                sessions[i]["time"],
                               ),
                             ),
                           ),
@@ -95,7 +109,15 @@ class _PreviousSessionsState extends State<PreviousSessions> {
                                 ),
                                 TextButton(
                                   child: const Text("See Details"),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    detailsPage(
+                                      sessions[i]["user"],
+                                      sessions[i]["date"],
+                                      sessions[i]["time"],
+                                      sessions[i]["title"],
+                                      sessions[i]["doctor"],
+                                    );
+                                  },
                                 ),
                                 const SizedBox(
                                   width: 8,

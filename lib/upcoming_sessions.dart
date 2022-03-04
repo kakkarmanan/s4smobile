@@ -74,13 +74,13 @@ class _UpcomingSessionsState extends State<UpcomingSessions> {
                             flex: 5,
                             child: ListTile(
                               title: Text(
-                                sessions?[i]["title"],
+                                sessions[i]["title"],
                               ),
                               subtitle: Text(
-                                sessions?[i]["date"],
+                                sessions[i]["date"],
                               ),
                               trailing: Text(
-                                sessions?[i]["time"],
+                                sessions[i]["time"],
                               ),
                             ),
                           ),

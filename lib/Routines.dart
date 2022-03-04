@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_file_picker/form_builder_file_picker.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:s4smobile/routines_list.dart';
 
 class RoutineUpload extends StatefulWidget {
   const RoutineUpload({Key? key}) : super(key: key);
@@ -10,8 +16,10 @@ class RoutineUpload extends StatefulWidget {
 }
 
 class _RoutineUploadState extends State<RoutineUpload> {
+  final LocalStorage storage = LocalStorage('s4s');
   final _formKey = GlobalKey<FormBuilderState>();
   bool _useCustomFileViewer = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,30 +73,17 @@ class _RoutineUploadState extends State<RoutineUpload> {
                       ),
                     ],
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RoutinesList()));
+                    },
+                    child: const Text("Previous Routines"),
+                  ),
                 ],
               ),
-            ),
-          ),
-          Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const ListTile(
-                  leading: Icon(Icons.check_box_rounded),
-                  title: Text('Date of Routine'),
-                  subtitle: Text('Timestamp of Upload'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    TextButton(
-                      child: const Text('View Routine'),
-                      onPressed: () {/* ... */},
-                    ),
-                    const SizedBox(width: 8),
-                  ],
-                ),
-              ],
             ),
           ),
         ],
