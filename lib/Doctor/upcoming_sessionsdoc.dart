@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:s4smobile/DoctorHome.dart';
-import 'package:s4smobile/session_card.dart';
-import 'package:s4smobile/model/session_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:s4smobile/session_details.dart';
 
 class UpcomingSessionsDoc extends StatefulWidget {
   UpcomingSessionsDoc({Key? key}) : super(key: key);
@@ -14,36 +13,10 @@ class UpcomingSessionsDoc extends StatefulWidget {
 }
 
 class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
-  List sessions = [
-    {
-      "cardNumber": 'Session heading',
-      "balance": '2222',
-      "onTopRightButtonClicked": () => {},
-      "cardIcon": Icon(Icons.upcoming_outlined),
-    },
-    {
-      "cardNumber": 'Session heading',
-      "balance": '2222',
-      "onTopRightButtonClicked": () => {},
-      "cardIcon": Icon(Icons.upcoming_outlined),
-    },
-    {
-      "cardNumber": 'Session heading',
-      "balance": '2222',
-      "onTopRightButtonClicked": () => {},
-      "cardIcon": Icon(Icons.upcoming_outlined),
-    },
-  ];
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getSessions();
-  }
-
-  getSessions() async {
-    var url = Uri.parse('https://shrink4shrink.herokuapp.com/api/usersessions');
+  final LocalStorage storage = LocalStorage('s4s');
+  List sessions = [];
+  Future<void> loadData() async {
+    var url = Uri.parse("https://shrink4shrink.herokuapp.com/api/usersessions");
     var response = await http.post(url,
         headers: <String, String>{
           'content-type': 'application/json',
@@ -51,13 +24,48 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
           "charset": "utf-8"
         },
         body: json.encode({
-          'email': storage.getItem('user')['emial'],
-          'upcoming': 'true',
-          'doctor': 'true',
+          'email': storage.getItem("user")["email"],
+          'upcoming': "true",
+          'doctor': "true",
         }));
-    print(response.body);
-    print(response.statusCode);
-    var decodedData = jsonDecode(response.body);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    if (response.statusCode == 200) {
+      print(response.body);
+      var data = jsonDecode(response.body);
+      setState(() {
+        sessions = data;
+      });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('No sessions found')));
+    }
+  }
+
+  void detailsPage(
+      String user, String date, String time, String title, String doctor) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SessionDetails(
+                  user: user,
+                  date: date,
+                  time: time,
+                  title: title,
+                  doctor: doctor,
+                )));
+  }
+
+  Future<void> awaitReady() async {
+    await storage.ready;
+    print(storage.getItem("user")["email"]);
+  }
+
+  @override
+  void initState() {
+    awaitReady();
+    loadData();
+    super.initState();
   }
 
   @override
@@ -66,19 +74,67 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
       body: ListView.builder(
         itemCount: sessions.length,
         itemBuilder: (context, i) {
-          Session new_session = new Session(
-            title: sessions[i]['cardNumber'],
-            date: '2 pm at 6/12/12',
-            status: 'Pending',
-          );
-          return Column(
-            children: [
-              SizedBox(
-                height: 1.0,
+          return Card(
+            child: Container(
+              height: 100,
+              color: Colors.white,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: ListTile(
+                              title: Text(
+                                sessions[i]["title"],
+                              ),
+                              subtitle: Text(
+                                sessions[i]["date"],
+                              ),
+                              trailing: Text(
+                                sessions[i]["time"],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                TextButton(
+                                  child: const Text("See Details"),
+                                  onPressed: () {
+                                    detailsPage(
+                                      sessions[i]["user"],
+                                      sessions[i]["date"],
+                                      sessions[i]["time"],
+                                      sessions[i]["title"],
+                                      sessions[i]["doctor"],
+                                    );
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    flex: 8,
+                  ),
+                ],
               ),
-              SessionCard(
-                  onTopRightButtonClicked: () => {}, cardIcon: Icon(Icons.add))
-            ],
+            ),
+            elevation: 8,
+            margin: const EdgeInsets.all(10),
           );
         },
         scrollDirection: Axis.vertical,

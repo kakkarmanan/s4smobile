@@ -18,6 +18,13 @@ class SessionCard extends StatelessWidget {
         const LinearGradient(colors: [Colors.black87, Colors.black54]),
   }) : super(key: key);
 
+  // const SessionCard({
+  //   required title,
+  //   required date,
+  //   required patientName,
+  //   required
+  // })
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -130,51 +137,6 @@ class SessionCard extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     )
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              color: Colors.black,
-              thickness: .2,
-              indent: 8,
-              endIndent: 8,
-            ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Delivered',
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    GestureDetector(
-                      onTap: null,
-                      child: Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 2.0),
-                              child: Icon(
-                                Icons.replay,
-                                size: 12,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text(
-                              'Repeat Order',
-                              style: TextStyle(color: Colors.grey[700]),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),

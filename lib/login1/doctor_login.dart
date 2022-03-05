@@ -20,10 +20,30 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
 
   TextEditingController passwordController = TextEditingController();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    awaitReady();
+  }
+
   void addItemsToLocalStorage(var data) async {
     await storage.setItem('user', data);
     print("hello");
     print(storage.getItem('user'));
+  }
+
+  Future<void> awaitReady() async {
+    await storage.ready;
+    print(storage.getItem('user'));
+    if (storage.getItem('user') != null) {
+      print(storage.getItem('user'));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DoctorHome(email: storage.getItem('user')["email"])));
+    }
   }
 
   onSubmit() async {

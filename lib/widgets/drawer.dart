@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 //import 'package:mobial/pages/page/profile_page.dart';
 //import 'package:mobial/login9/ui/login_page.dart';
 //import 'package:mobial/widgets/privacy_policy.dart';
-//import 'package:localstorage/localstorage.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:mobial/widgets/settings.dart';
 import 'package:s4smobile/find_doctor.dart';
+import 'package:s4smobile/login1/welcome.dart';
 import 'package:s4smobile/profile.dart';
 import 'package:s4smobile/widgets/privacy_policy.dart';
 
 Widget drawer(BuildContext context) {
-  //final LocalStorage storage = new LocalStorage('mobial');
+  final LocalStorage storage = new LocalStorage('s4s');
   return Drawer(
     backgroundColor: Color(0xff8CCEC8),
     child: ListView(
@@ -132,16 +133,16 @@ Widget drawer(BuildContext context) {
             color: Colors.black,
           ),
           onTap: () {
-            // storage.deleteItem('user');
-            // storage.clear();
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) {
-            //       return Login9();
-            //     },
-            //   ),
-            // );
+            storage.deleteItem('user');
+            storage.clear();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return WelcomePage();
+                },
+              ),
+            );
           },
         ),
       ],
