@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:s4smobile/chatpatient.dart';
 import 'package:s4smobile/previousSessions.dart';
 import 'package:s4smobile/Routines.dart';
 import 'package:s4smobile/upcoming_sessions.dart';
@@ -46,6 +47,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text("s4s"),
+        actions: [
+          IconButton(
+              onPressed: () => {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PatientChat(
+                            reciever:
+                                storage.getItem('user')['assigned_doctor'])))
+                  },
+              icon: Icon(Icons.chat))
+        ],
       ),
       drawer: drawer(context),
       floatingActionButton: FloatingActionButton(

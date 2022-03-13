@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:s4smobile/Doctor/chat_doc.dart';
+import 'package:s4smobile/Doctor/patients.dart';
 import 'package:s4smobile/Doctor/pending_sessions.dart';
 import 'package:s4smobile/Doctor/previous_sessionsdoc.dart';
 import 'package:s4smobile/Doctor/upcoming_sessionsdoc.dart';
@@ -56,6 +58,15 @@ class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text("s4s"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.chat),
+            onPressed: () => {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChatDoctor(reciever: 'Patient')))
+            },
+          )
+        ],
       ),
       drawer: drawer(context),
       floatingActionButton: FloatingActionButton(
@@ -113,7 +124,7 @@ class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
               backgroundColor: Colors.green,
               icon: Icon(Icons.task, color: Colors.black),
               activeIcon: Icon(Icons.task, color: Colors.green),
-              title: Text("Pending"))
+              title: Text("Patients"))
         ],
       ),
       body: PageView(
@@ -121,7 +132,7 @@ class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
           DoctorDashboard(),
           UpcomingSessionsDoc(),
           PreviousSessionsDoc(),
-          PendingSessionsDoc(),
+          Patients(),
         ],
         controller: _pageController,
         onPageChanged: changePage,
