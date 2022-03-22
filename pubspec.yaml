@@ -64,6 +64,8 @@ dev_dependencies:
   banner_listtile: ^2.2.0
   firebase_core: ^1.13.1
   cloud_firestore: ^3.1.10
+  loading_animation_widget: ^1.1.0+3
+  lottie: ^1.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -79,6 +81,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/img/
+    - assets/img/lottieFiles/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

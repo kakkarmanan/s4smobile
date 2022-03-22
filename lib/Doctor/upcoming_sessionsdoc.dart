@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:s4smobile/session_details.dart';
+import 'package:s4smobile/widgets/progress.dart';
 
 class UpcomingSessionsDoc extends StatefulWidget {
   UpcomingSessionsDoc({Key? key}) : super(key: key);
@@ -14,8 +15,12 @@ class UpcomingSessionsDoc extends StatefulWidget {
 
 class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
   final LocalStorage storage = LocalStorage('s4s');
+  bool loading = false;
   List sessions = [];
   Future<void> loadData() async {
+    setState(() {
+      loading = true;
+    });
     var url = Uri.parse("https://shrink4shrink.herokuapp.com/api/usersessions");
     var response = await http.post(url,
         headers: <String, String>{
@@ -40,6 +45,9 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('No sessions found')));
     }
+    setState(() {
+      loading = false;
+    });
   }
 
   void detailsPage(
@@ -71,76 +79,78 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: sessions.length,
-        itemBuilder: (context, i) {
-          return Card(
-            child: Container(
-              height: 100,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: ListTile(
-                              title: Text(
-                                sessions[i]["title"],
-                              ),
-                              subtitle: Text(
-                                sessions[i]["date"],
-                              ),
-                              trailing: Text(
-                                sessions[i]["time"],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+      body: !loading
+          ? (ListView.builder(
+              itemCount: sessions.length,
+              itemBuilder: (context, i) {
+                return Card(
+                  child: Container(
+                    height: 100,
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            child: Column(
                               children: [
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                TextButton(
-                                  child: const Text("See Details"),
-                                  onPressed: () {
-                                    detailsPage(
-                                      sessions[i]["user"],
-                                      sessions[i]["date"],
-                                      sessions[i]["time"],
+                                Expanded(
+                                  flex: 5,
+                                  child: ListTile(
+                                    title: Text(
                                       sessions[i]["title"],
-                                      sessions[i]["doctor"],
-                                    );
-                                  },
+                                    ),
+                                    subtitle: Text(
+                                      sessions[i]["date"],
+                                    ),
+                                    trailing: Text(
+                                      sessions[i]["time"],
+                                    ),
+                                  ),
                                 ),
-                                const SizedBox(
-                                  width: 8,
+                                Expanded(
+                                  flex: 5,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      TextButton(
+                                        child: const Text("See Details"),
+                                        onPressed: () {
+                                          detailsPage(
+                                            sessions[i]["user"],
+                                            sessions[i]["date"],
+                                            sessions[i]["time"],
+                                            sessions[i]["title"],
+                                            sessions[i]["doctor"],
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                          flex: 8,
+                        ),
+                      ],
                     ),
-                    flex: 8,
                   ),
-                ],
-              ),
-            ),
-            elevation: 8,
-            margin: const EdgeInsets.all(10),
-          );
-        },
-        scrollDirection: Axis.vertical,
-        //physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-      ),
+                  elevation: 8,
+                  margin: const EdgeInsets.all(10),
+                );
+              },
+              scrollDirection: Axis.vertical,
+              //physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+            ))
+          : progress(),
     );
   }
 }

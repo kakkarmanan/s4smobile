@@ -31,7 +31,7 @@ class _PatientChatState extends State<PatientChat> {
                 Navigator.pop(context);
               }),
         ],
-        title: Center(child: Text('⚡️Chat')),
+        title: Center(child: Text('')),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(

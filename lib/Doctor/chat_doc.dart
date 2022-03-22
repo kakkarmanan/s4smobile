@@ -8,15 +8,18 @@ LocalStorage storage = LocalStorage('s4s');
 
 class ChatDoctor extends StatefulWidget {
   String reciever = "";
-  ChatDoctor({required this.reciever});
+  String recEmail;
+  ChatDoctor({required this.reciever, required this.recEmail});
 
   @override
-  State<ChatDoctor> createState() => _ChatDoctorState(reciever: reciever);
+  State<ChatDoctor> createState() =>
+      _ChatDoctorState(reciever: reciever, recEmail: recEmail);
 }
 
 class _ChatDoctorState extends State<ChatDoctor> {
   final String reciever;
-  _ChatDoctorState({required this.reciever});
+  final String recEmail;
+  _ChatDoctorState({required this.reciever, required this.recEmail});
   TextEditingController messageTextController = TextEditingController();
   String messageText = '';
   @override
@@ -31,7 +34,7 @@ class _ChatDoctorState extends State<ChatDoctor> {
                 Navigator.pop(context);
               }),
         ],
-        title: Center(child: Text('⚡️Chat')),
+        title: Center(child: Text('$reciever')),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
@@ -39,7 +42,9 @@ class _ChatDoctorState extends State<ChatDoctor> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessagesStream(),
+            MessagesStream(
+              rec_email: recEmail,
+            ),
             Container(
               decoration: BoxDecoration(
                 border: Border(
@@ -65,7 +70,7 @@ class _ChatDoctorState extends State<ChatDoctor> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': storage.getItem('user')['email'],
-                        'reciever': reciever,
+                        'reciever': recEmail,
                         'timestamp': FieldValue.serverTimestamp(),
                       });
                     },
@@ -89,6 +94,8 @@ class _ChatDoctorState extends State<ChatDoctor> {
 }
 
 class MessagesStream extends StatelessWidget {
+  String? rec_email;
+  MessagesStream({this.rec_email});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -102,12 +109,17 @@ class MessagesStream extends StatelessWidget {
             final messageText = message['text'];
             final messageSender = message['sender'];
             final messageReciever = message['reciever'];
-            final messageWidget = MessageBubble(
-              sender: messageSender,
-              text: messageText,
-              isMe: storage.getItem('user')['email'] == messageSender,
-            );
-            messageWidgets.add(messageWidget);
+            if (messageSender == storage.getItem('user')['email'] &&
+                    messageReciever == rec_email ||
+                messageSender == rec_email &&
+                    messageReciever == storage.getItem('user')['email']) {
+              final messageWidget = MessageBubble(
+                sender: messageSender,
+                text: messageText,
+                isMe: storage.getItem('user')['email'] == messageSender,
+              );
+              messageWidgets.add(messageWidget);
+            }
           }
           return Expanded(
             child: ListView(

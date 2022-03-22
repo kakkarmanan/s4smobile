@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:s4smobile/login1/welcome.dart';
+import 'package:s4smobile/onboarding/onboarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,6 @@ class MyApp extends StatelessWidget {
           backgroundColor: const Color(0xffd5e4e1),
           colorScheme: const ColorScheme.light(),
         ),
-        home: WelcomePage());
+        home: OnboardingPage());
   }
 }

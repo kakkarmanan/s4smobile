@@ -62,8 +62,8 @@ class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
           IconButton(
             icon: Icon(Icons.chat),
             onPressed: () => {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChatDoctor(reciever: 'Patient')))
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => ChatDoctor(reciever: 'Patient')))
             },
           )
         ],
