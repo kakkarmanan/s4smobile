@@ -14,7 +14,7 @@ import 'package:s4smobile/widgets/privacy_policy.dart';
 Widget drawer(BuildContext context) {
   final LocalStorage storage = new LocalStorage('s4s');
   return Drawer(
-    backgroundColor: Color(0xff8CCEC8),
+    backgroundColor: Color(0xff243D25),
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -29,9 +29,9 @@ Widget drawer(BuildContext context) {
           ),
           child: Center(
             child: Text(
-              "MoBIAL",
+              "S4S",
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w800),
             ),
@@ -42,11 +42,12 @@ Widget drawer(BuildContext context) {
             'Account',
             style: GoogleFonts.signika(
               fontSize: 17.0,
+              color: Colors.white,
             ),
           ),
           leading: Icon(
             Icons.account_circle_outlined,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onTap: () {
             Navigator.push(
@@ -64,11 +65,12 @@ Widget drawer(BuildContext context) {
             'Change/Find Doctor',
             style: GoogleFonts.signika(
               fontSize: 17.0,
+              color: Colors.white,
             ),
           ),
           leading: Icon(
             Icons.list,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onTap: () {
             Navigator.push(
@@ -107,10 +109,11 @@ Widget drawer(BuildContext context) {
           title: Text('Privacy Policy',
               style: GoogleFonts.signika(
                 fontSize: 17.0,
+                color: Colors.white,
               )),
           leading: Icon(
             Icons.privacy_tip,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onTap: () {
             Navigator.push(
@@ -127,10 +130,11 @@ Widget drawer(BuildContext context) {
           title: Text('Log Out',
               style: GoogleFonts.signika(
                 fontSize: 17.0,
+                color: Colors.white,
               )),
           leading: Icon(
             Icons.logout,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onTap: () {
             storage.deleteItem('user');

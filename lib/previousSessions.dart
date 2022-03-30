@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:s4smobile/session_details.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PreviousSessions extends StatefulWidget {
   PreviousSessions({Key? key}) : super(key: key);
@@ -90,6 +91,7 @@ class _PreviousSessionsState extends State<PreviousSessions> {
                             child: ListTile(
                               title: Text(
                                 sessions[i]["title"],
+                                style: GoogleFonts.poppins(),
                               ),
                               subtitle: Text(
                                 sessions[i]["date"],

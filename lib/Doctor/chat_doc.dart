@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final _firestore = FirebaseFirestore.instance;
 LocalStorage storage = LocalStorage('s4s');
@@ -35,7 +36,7 @@ class _ChatDoctorState extends State<ChatDoctor> {
               }),
         ],
         title: Center(child: Text('$reciever')),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Color.fromARGB(255, 13, 90, 65),
       ),
       body: SafeArea(
         child: Column(
@@ -77,7 +78,7 @@ class _ChatDoctorState extends State<ChatDoctor> {
                     child: Text(
                       'Send',
                       style: TextStyle(
-                        color: Colors.lightBlueAccent,
+                        color: Color.fromARGB(255, 13, 90, 65),
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
                       ),
@@ -134,7 +135,7 @@ class MessagesStream extends StatelessWidget {
         } else {
           return Center(
             child: CircularProgressIndicator(
-              backgroundColor: Colors.lightBlueAccent,
+              backgroundColor: Colors.white,
             ),
           );
         }
@@ -174,7 +175,7 @@ class MessageBubble extends StatelessWidget {
               bottomRight: Radius.circular(30.0),
               topRight: isMe ? Radius.zero : Radius.circular(30.0),
             ),
-            color: isMe ? Colors.lightBlueAccent : Colors.white,
+            color: isMe ? Color.fromARGB(255, 13, 90, 65) : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
@@ -182,10 +183,9 @@ class MessageBubble extends StatelessWidget {
               ),
               child: Text(
                 text,
-                style: TextStyle(
-                  fontSize: 15.0,
-                  color: isMe ? Colors.white : Colors.black54,
-                ),
+                style: GoogleFonts.poppins(
+                    fontSize: 15.0,
+                    color: isMe ? Colors.white : Colors.black54),
               ),
             ),
           ),

@@ -15,17 +15,6 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
     );
   }
 
-  _renderAppBar(context) {
-    return MediaQuery.removePadding(
-      context: context,
-      removeBottom: true,
-      child: AppBar(
-        elevation: 0.0,
-        backgroundColor: const Color(0x00FFFFFF),
-      ),
-    );
-  }
-
   _renderContent(context) {
     return Card(
       elevation: 0.0,
@@ -40,7 +29,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
         },
         front: Container(
           decoration: const BoxDecoration(
-            color: Color(0xFF006666),
+            color: Color.fromARGB(255, 13, 90, 65),
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           child: Column(
@@ -48,9 +37,11 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text('Upcoming Session',
-                  style: Theme.of(context).textTheme.headline4),
-              Text('Click to know date',
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0,
+                  )),
+              Text('Click to know date', style: TextStyle(color: Colors.white)),
             ],
           ),
         ),
@@ -62,9 +53,12 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Date', style: Theme.of(context).textTheme.headline1),
-              Text('Click to flip',
-                  style: Theme.of(context).textTheme.bodyText1),
+              Text('Date',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0,
+                  )),
+              Text('Click to flip', style: TextStyle(color: Colors.white)),
             ],
           ),
         ),
@@ -82,7 +76,9 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              _renderAppBar(context),
+              SizedBox(
+                height: 10.0,
+              ),
               Expanded(
                 flex: 4,
                 child: Card(
@@ -98,7 +94,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     },
                     front: Container(
                       decoration: const BoxDecoration(
-                        color: Color(0xFF006666),
+                        color: Color.fromARGB(255, 13, 90, 65),
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Column(
@@ -106,24 +102,30 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text('Total Sessions',
-                              style: Theme.of(context).textTheme.headline4),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                              )),
                           Text('Click to See',
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),
                     back: Container(
                       decoration: const BoxDecoration(
-                        color: Color(0xFF006666),
+                        color: Color.fromARGB(255, 13, 90, 65),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text('Sessions',
-                              style: Theme.of(context).textTheme.headline3),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                              )),
                           Text('Click to flip',
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),
@@ -145,32 +147,40 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     },
                     front: Container(
                       decoration: const BoxDecoration(
-                        color: Color(0xFF006666),
+                        color: Color.fromARGB(255, 13, 90, 65),
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text('Upcoming Session',
-                              style: Theme.of(context).textTheme.headline4),
-                          Text('Click to know date',
-                              style: Theme.of(context).textTheme.bodyText1),
+                          Center(
+                            child: Text('Upcoming Session',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 40.0,
+                                )),
+                          ),
+                          Text('Click to see date',
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),
                     back: Container(
                       decoration: const BoxDecoration(
-                        color: Color(0xFF006666),
+                        color: Color.fromARGB(255, 13, 90, 65),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text('Date',
-                              style: Theme.of(context).textTheme.headline3),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                              )),
                           Text('Click to flip',
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),
@@ -192,7 +202,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     },
                     front: Container(
                       decoration: const BoxDecoration(
-                        color: Color(0xFF006666),
+                        color: Color.fromARGB(255, 13, 90, 65),
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Column(
@@ -200,24 +210,30 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text('Previous Session',
-                              style: Theme.of(context).textTheme.headline4),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                              )),
                           Text('Click to know date',
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),
                     back: Container(
                       decoration: const BoxDecoration(
-                        color: Color(0xFF006666),
+                        color: Color.fromARGB(255, 13, 90, 65),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text('Date',
-                              style: Theme.of(context).textTheme.headline3),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                              )),
                           Text('Click to flip',
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                     ),

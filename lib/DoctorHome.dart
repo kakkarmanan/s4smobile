@@ -58,15 +58,7 @@ class _HomeState extends State<DoctorHome> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text("s4s"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.chat),
-            onPressed: () => {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ChatDoctor(reciever: 'Patient')))
-            },
-          )
-        ],
+        backgroundColor: Color.fromARGB(255, 13, 90, 65),
       ),
       drawer: drawer(context),
       floatingActionButton: FloatingActionButton(

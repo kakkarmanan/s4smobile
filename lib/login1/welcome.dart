@@ -74,14 +74,16 @@ class WelcomePage extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => UserSignupPage()));
                       },
-                      color: Colors.yellow,
+                      color: Color.fromARGB(255, 13, 90, 65),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       child: const Text(
                         "User Sign up",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 18),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: Colors.white),
                       ),
                     ),
                   ),
@@ -140,14 +142,16 @@ class WelcomePage extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => DoctorSignupPage()));
                       },
-                      color: Colors.yellow,
+                      color: Color.fromARGB(255, 13, 90, 65),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       child: const Text(
                         "Doctor Sign up",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 18),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: Colors.white),
                       ),
                     ),
                   ),

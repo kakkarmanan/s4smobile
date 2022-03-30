@@ -15,21 +15,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
   int currentPage = 0;
   List<Map<dynamic, dynamic>> onboardingData = [
     {
-      "text1": "QUICK AND EASY",
-      "text2": "One-stop solution for all your real estate investment goals",
+      "text1": "WELCOME TO SHRINK4SHRINK",
+      "text2": "We are here to solve your problems",
       "image": "assets/img/lottieFiles/71851-doctor-with-mobile.json",
       "height": 322.0
     },
     {
-      "text1": "MARKET RESEARCH",
-      "text2": "Choose from a wide range of Reits, InvITS, mutual funds etc",
+      "text1": "GET ONLINE PSYCHITRIC THERAPY SESSIONS",
+      "text2":
+          "Get online therapy sessions with in-app video sessions and prescriptions from doctors.",
       "image": "assets/img/lottieFiles/88284-doctor-prescription.json",
       "height": 322.0
     },
     {
-      "text1": "RELIABLE",
-      "text2":
-          "Best in class mechanism to track all major real estate pointers",
+      "text1": "FIND THE SUITABLE DOCTOR FOR YOU",
+      "text2": "Get the doctor that helps you the most",
       "image": "assets/img/lottieFiles/77192-search-doctor.json",
       "height": 322.0
     },

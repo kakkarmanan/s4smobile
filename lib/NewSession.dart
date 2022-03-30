@@ -3,6 +3,7 @@ import 'package:date_field/date_field.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 class NewSession extends StatefulWidget {
   const NewSession({Key? key}) : super(key: key);
@@ -53,6 +54,7 @@ class _NewSessionState extends State<NewSession> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Schedule Session"),
+        backgroundColor: Color.fromARGB(255, 13, 90, 65),
       ),
       body: Column(
         children: [
@@ -77,11 +79,11 @@ class _NewSessionState extends State<NewSession> {
               ),
               child: DateTimeFormField(
                 decoration: InputDecoration(
-                    hintText: "Departure Time",
+                    hintText: "Time of Session",
                     errorStyle: const TextStyle(color: Colors.redAccent),
                     suffixIcon:
                         const Icon(Icons.event_note, color: Colors.blueAccent),
-                    labelText: 'Departure Time',
+                    labelText: 'Time of Session',
                     hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 0.0, horizontal: 20.0),
@@ -127,10 +129,16 @@ class _NewSessionState extends State<NewSession> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 13, 90, 65))),
               onPressed: () {
                 createSession();
               },
-              child: const Text('Request Session'),
+              child: Text(
+                'Request Session',
+                style: GoogleFonts.poppins(),
+              ),
             ),
           ),
         ],

@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:s4smobile/session_details.dart';
 import 'package:s4smobile/widgets/progress.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UpcomingSessionsDoc extends StatefulWidget {
   UpcomingSessionsDoc({Key? key}) : super(key: key);
@@ -99,6 +100,7 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
                                   child: ListTile(
                                     title: Text(
                                       sessions[i]["title"],
+                                      style: GoogleFonts.poppins(),
                                     ),
                                     subtitle: Text(
                                       sessions[i]["date"],
@@ -117,7 +119,8 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
                                         width: 8,
                                       ),
                                       TextButton(
-                                        child: const Text("See Details"),
+                                        child: Text("See Details",
+                                            style: GoogleFonts.poppins()),
                                         onPressed: () {
                                           detailsPage(
                                             sessions[i]["user"],
@@ -142,7 +145,7 @@ class _UpcomingSessionsDocState extends State<UpcomingSessionsDoc> {
                       ],
                     ),
                   ),
-                  elevation: 8,
+                  // elevation: 8,
                   margin: const EdgeInsets.all(10),
                 );
               },

@@ -31,8 +31,9 @@ class _PatientChatState extends State<PatientChat> {
                 Navigator.pop(context);
               }),
         ],
-        title: Center(child: Text('')),
-        backgroundColor: Colors.lightBlueAccent,
+        title: Center(
+            child: Text('${storage.getItem('user')['doctor_assigned']}')),
+        backgroundColor: Color.fromARGB(255, 13, 90, 65),
       ),
       body: SafeArea(
         child: Column(
@@ -65,14 +66,14 @@ class _PatientChatState extends State<PatientChat> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': storage.getItem('user')['email'],
-                        'reciever': reciever,
+                        'reciever': storage.getItem('user')['doctor_assigned'],
                         'timestamp': FieldValue.serverTimestamp(),
                       });
                     },
                     child: Text(
                       'Send',
                       style: TextStyle(
-                        color: Colors.lightBlueAccent,
+                        color: Color.fromARGB(255, 13, 90, 65),
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
                       ),
@@ -162,7 +163,7 @@ class MessageBubble extends StatelessWidget {
               bottomRight: Radius.circular(30.0),
               topRight: isMe ? Radius.zero : Radius.circular(30.0),
             ),
-            color: isMe ? Colors.lightBlueAccent : Colors.white,
+            color: isMe ? Color.fromARGB(255, 13, 90, 65) : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,

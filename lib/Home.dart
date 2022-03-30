@@ -47,13 +47,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text("s4s"),
+        backgroundColor: Color.fromARGB(255, 13, 90, 65),
         actions: [
           IconButton(
               onPressed: () => {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => PatientChat(
                             reciever:
-                                storage.getItem('user')['assigned_doctor'])))
+                                storage.getItem('user')["doctor_assigned"])))
                   },
               icon: Icon(Icons.chat))
         ],

@@ -75,6 +75,7 @@ class _UpcomingSessionsState extends State<UpcomingSessions> {
                             child: ListTile(
                               title: Text(
                                 sessions[i]["title"],
+                                style: GoogleFonts.poppins(),
                               ),
                               subtitle: Text(
                                 sessions[i]["date"],
@@ -92,7 +93,7 @@ class _UpcomingSessionsState extends State<UpcomingSessions> {
                 ],
               ),
             ),
-            elevation: 8,
+            //elevation: 8,
             margin: const EdgeInsets.all(10),
           );
         },

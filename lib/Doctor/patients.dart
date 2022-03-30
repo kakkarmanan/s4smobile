@@ -70,6 +70,7 @@ class PatientListTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BannerListTile(
+          backgroundColor: Color.fromARGB(255, 13, 90, 65),
           onTap: () => {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ChatDoctor(
